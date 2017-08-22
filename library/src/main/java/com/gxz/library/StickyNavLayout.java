@@ -383,20 +383,18 @@ public class StickyNavLayout extends LinearLayout {
         return super.onInterceptTouchEvent(ev);
     }
 
-    private void getCurrentScrollView() {
+   private void getCurrentScrollView() {
         int currentItem = mViewPager.getCurrentItem();
         PagerAdapter a = mViewPager.getAdapter();
         if (a instanceof FragmentPagerAdapter) {
-            FragmentPagerAdapter fadapter = (FragmentPagerAdapter) a;
-            Fragment item = fadapter.getItem(currentItem);
+           Fragment item = (Fragment) this.mViewPager.getAdapter().instantiateItem(this.mViewPager, currentItem);
             View v = item.getView();
             if (v != null) {
                 mInnerScrollView = (ViewGroup) (v
                         .findViewById(R.id.id_stickynavlayout_innerscrollview));
             }
         } else if (a instanceof FragmentStatePagerAdapter) {
-            FragmentStatePagerAdapter fsAdapter = (FragmentStatePagerAdapter) a;
-            Fragment item = fsAdapter.getItem(currentItem);
+            Fragment item = (Fragment) this.mViewPager.getAdapter().instantiateItem(this.mViewPager, currentItem);
             View v = item.getView();
             if (v != null) {
                 mInnerScrollView = (ViewGroup) (v
